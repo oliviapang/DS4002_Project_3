@@ -1,5 +1,4 @@
 # DS4002_Project_3
-# DS4002_Project_1
 ## Table of Contents
 1. Software and Platform  
 2. Documentation Map  
