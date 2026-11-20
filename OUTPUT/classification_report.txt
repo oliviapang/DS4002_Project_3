@@ -1,0 +1,20 @@
+                                  precision    recall  f1-score   support
+
+15th Century (Unspecified Style)      0.800     0.615     0.696        13
+16th Century (Unspecified Style)      0.577     0.714     0.638        21
+17th Century (Unspecified Style)      0.444     0.432     0.438        37
+18th Century (Unspecified Style)      0.688     0.647     0.667        51
+19th Century (Unspecified Style)      0.528     0.671     0.591        70
+                     Chinese Art      0.848     0.966     0.903        29
+                        Folk Art      0.667     0.500     0.571         4
+                   Impressionism      0.857     0.600     0.706        30
+                    Japanese Art      0.923     0.800     0.857        15
+                       Modernism      1.000     0.333     0.500         3
+              Post-Impressionism      0.750     0.667     0.706         9
+                         Realism      0.167     0.111     0.133         9
+                     Renaissance      0.000     0.000     0.000         6
+                 South Asian Art      1.000     0.867     0.929        15
+
+                        accuracy                          0.641       312
+                       macro avg      0.661     0.566     0.595       312
+                    weighted avg      0.654     0.641     0.640       312
