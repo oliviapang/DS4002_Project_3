@@ -6,9 +6,16 @@
 
 ## Software and Platform
 Softwares used: Google Collab and Python 3.13.15    
-Add-ons: pandas 2.2.3, numpy 2.1.3, matplotlib.pyplot 3.10.0, seaborn 0.13.2, scikit-learn 1.6.1, joblib 1.6.0    
-Platform: Windows
+Add-ons: pandas 2.2.3, numpy 2.1.3, matplotlib.pyplot 3.10.0, seaborn 0.13.2, scikit-learn 1.6.1, joblib 1.6.0, torch 2.11.0, torchvision 0.26.0, timm 1.0.19, requests 2.32.4, pillow 11.3.0, shutil.
 ## Documentation Map
+# DS4002 Project 3: AIC Art Movement Classifier
+
+This repository implements an end-to-end data cleaning, exploratory data analysis, and computer vision classification pipeline for Art Institute of Chicago (AIC) paintings using a pretrained **ConvNeXt-Tiny** (`convnext_tiny.fb_in22k_ft_in1k`) model.
+
+---
+
+## Documentation Map
+
 ```mermaid
 graph TD
     %% Repository Root
@@ -23,8 +30,9 @@ graph TD
 
     %% DATA Directory Chain
     DATA --> D1[README.md]
-    D1 --> D2[cleaned_aic_paintings_colab.csv]
-    D2 --> D3[cleaned_aic_style_counts_colab.csv]
+    D1 --> D2[aic_paintings_movements_links.csv]
+    D2 --> D3[cleaned_aic_paintings_colab.csv]
+    D3 --> D4[cleaned_aic_style_counts_colab.csv]
 
     %% OUTPUT Directory Chain
     OUTPUT --> O1[classification_report.txt]
@@ -48,17 +56,32 @@ graph TD
     SCRIPTS --> S1[1_Cleaning_EDA_Script.ipynb]
     S1 --> S2[2_Build_and_Test_Model.ipynb]
 
-    %% Color Styling to Match Reference
+    %% Color Styling
     classDef purple fill:#E1D5E7,stroke:#9673A6,stroke-width:1.5px,color:#000;
     classDef blue fill:#DAE8FC,stroke:#6C8EBF,stroke-width:1.5px,color:#000;
     classDef green fill:#D5E8D4,stroke:#82B366,stroke-width:1.5px,color:#000;
 
     class Repo purple;
     class DATA,OUTPUT,SCRIPTS,LICENSE,README_ROOT blue;
-    class D1,D2,D3,O1,O2,O3,O4,O5,O6,O7,O8,O9,O10,O11,O12,O13,O14,O15,O16,S1,S2 green;
+    class D1,D2,D3,D4,O1,O2,O3,O4,O5,O6,O7,O8,O9,O10,O11,O12,O13,O14,O15,O16,S1,S2 green;
 
 ```
 ## Instructions for Reproduction 
+1. Download metadata scraped from the Art Institute of Chicago titled, aic_paintings_movements_links.csv and located in the DATA folder. Upload it to your Google Colab environment (or Google Drive). Note: Steps 2–5 can be accomplished by running 1_Cleaning_EDA_Script.ipynb in Google Colab.
+2. Import the required libraries and load aic_paintings_movements_links.csv into a pandas DataFrame.
+3. Clean the dataset by dropping rows missing artwork_id or title, and split semicolon separated all-styles column.
+4. Create bar chart and heatmap to determine which genres heavily co-occur and require remapping. Remap and consolidate the styles into 17 standardized movement/century target categories: '14th Century (Unspecified Style)', '15th Century (Unspecified Style)', '16th Century (Unspecified Style)', '17th Century (Unspecified Style)', '18th Century (Unspecified Style)', '19th Century (Unspecified Style)', 'Baroque', 'Chinese Art', 'Folk Art', 'Impressionism', 'Japanese Art', 'Modernism', 'Neoclassicism', 'Post-Impressionism', 'Realism', 'Renaissance', 'South Asian Art'.
+5. Finish EDA with cleaned data set: "cleaned_aic_paintings_colab.csv." Create new bar chart and heatmap of movement frequency and co-occurance and download cleaned csv.
+6. Download 2_Build_and_Test_Model.ipynb and run within Google Colab. Note: Steps 6 - XXX) can be accomplished by running 2_Build_and_Test_Model.ipynb in Google Colab). Import the required libraries and load in DATA/cleaned_aic_paintings_colab.csv into script (located in DATA folder, or locally from downloaded data).
+7. Configure notebook and set hyperparameters. Download and verify missing artwork images from image_url, and transform images to reduce model overfitting.
+8. Split the verified dataset into stratified training (80%, 1,246 paintings) and held-out testing (20%, 312 paintings) sets without leakage, and export train_split.csv and test_split.csv to OUTPUT.
+9. Build ConvNeXt model. Customize the model with 14-class linear classification head and inverse-frequency class-weighted cross-entropy loss and report metrics.
+11. Perform 5-fold stratified cross-validation on the training set and export cv_fold1_history.csv through cv_fold5_history.csv and cv_results.csv to OUTPUT.
+12. Train the final model on the full training set, saving final_train_history.csv to OUTPUT.
+13. Evaluate using the produced metrics and the Top-1 accuracy, Top-3 accuracy, balanced accuracy, Macro F1, and per-class precision against the 85% Top-1 finish-line target, evaluating the accuracy of the model and if project goal was achieved.
+14. Export the final confusion matrix (confusion_matrix.csv, confusion_matrix.png), Grad-CAM heatmaps (gradcam.png), evaluation metrics (test_metrics.json, classification_report.txt, test_predictions.csv), and model weights (convnext_art_movement.pt) to OUTPUT folder.
 
 ## References
-
+[1] Smarthistory, “Understanding art, an introduction.” [Online]. Available: https://smarthistory.org/introduction-to-art-historical-analysis/
+[2] “Introduction to Convolutional Neural Networks.” Geeks for Geeks. https://www.geeksforgeeks.org/machine-learning/introduction-convolution-neural-network/ 
+[3] Art Institute of Chicago, "Introduction," Art Institute of Chicago API Documentation. [Online]. Available: https://api.artic.edu/docs/#introduction 
