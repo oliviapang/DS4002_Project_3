@@ -92,6 +92,6 @@ graph TD
 13. Export the final confusion matrix (confusion_matrix.csv, confusion_matrix.png), Grad-CAM heatmaps (gradcam.png), evaluation metrics (test_metrics.json, classification_report.txt, test_predictions.csv), and model weights (convnext_art_movement.pt) to OUTPUT folder.
 
 ## References
-[1] Smarthistory, “Understanding art, an introduction.” [Online]. Available: https://smarthistory.org/introduction-to-art-historical-analysis/
-[2] “Introduction to Convolutional Neural Networks.” Geeks for Geeks. https://www.geeksforgeeks.org/machine-learning/introduction-convolution-neural-network/ 
-[3] Art Institute of Chicago, "Introduction," Art Institute of Chicago API Documentation. [Online]. Available: https://api.artic.edu/docs/#introduction 
+[1] Smarthistory, “Understanding art, an introduction.” [Online]. Available: https://smarthistory.org/introduction-to-art-historical-analysis/  
+[2] “Introduction to Convolutional Neural Networks.” Geeks for Geeks. https://www.geeksforgeeks.org/machine-learning/introduction-convolution-neural-network/   
+[3] Art Institute of Chicago, "Introduction," Art Institute of Chicago API Documentation. [Online]. Available: https://api.artic.edu/docs/#introduction   
