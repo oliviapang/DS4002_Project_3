@@ -7,12 +7,6 @@
 ## Software and Platform
 Softwares used: Google Collab and Python 3.13.15    
 Add-ons: pandas 2.2.3, numpy 2.1.3, matplotlib.pyplot 3.10.0, seaborn 0.13.2, scikit-learn 1.6.1, joblib 1.6.0, torch 2.11.0, torchvision 0.26.0, timm 1.0.19, requests 2.32.4, pillow 11.3.0, shutil.
-## Documentation Map
-# DS4002 Project 3: AIC Art Movement Classifier
-
-This repository implements an end-to-end data cleaning, exploratory data analysis, and computer vision classification pipeline for Art Institute of Chicago (AIC) paintings using a pretrained **ConvNeXt-Tiny** (`convnext_tiny.fb_in22k_ft_in1k`) model.
-
----
 
 ## Documentation Map
 
