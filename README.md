@@ -9,50 +9,57 @@ Softwares used: Google Collab and Python 3.13.15
 Add-ons: pandas 2.2.3, numpy 2.1.3, matplotlib.pyplot 3.10.0, seaborn 0.13.2, scikit-learn 1.6.1, joblib 1.6.0    
 Platform: Windows
 ## Documentation Map
+```markdown
+## Documentation Map
 ```mermaid
-flowchart TD
-    %% Styling
-    classDef data fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#01579b
-    classDef script1 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c
-    classDef script2 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20
-    classDef output fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100
+graph TD
+    %% Repository Root
+    Repo[Repository]
 
-    %% External Input
-    RAW[("aic_paintings_movements_links (1).csv<br/><i>Raw AIC API metadata (1,586 rows)</i>")]:::data
+    %% Top Level Folders & Files
+    Repo --> DATA[DATA]
+    Repo --> OUTPUT[OUTPUT]
+    Repo --> SCRIPTS[SCRIPTS]
+    Repo --> LICENSE[LICENSE.md]
+    Repo --> README_ROOT[README.md]
 
-    %% SCRIPTS Folder - Script 1
-    subgraph SCRIPTS ["SCRIPTS/"]
-        direction TB
-        S1["<b>1_Cleaning_EDA_Script.ipynb</b><br/>• Deduplicate & handle missing artist/medium nulls<br/>• Split semicolon style tags & remap 64 raw tags &rarr; 17 categories<br/>• Plot pre/post-mapping bar charts & co-occurrence heatmaps"]:::script1
+    %% DATA Directory Chain
+    DATA --> D1[README.md]
+    D1 --> D2[cleaned_aic_paintings_colab.csv]
+    D2 --> D3[cleaned_aic_style_counts_colab.csv]
 
-        S2["<b>2_Build_and_Test_Model.ipynb</b><br/>• Extract primary style & download images via AIC IIIF URLs<br/>• Drop rare classes (&lt;15 samples &rarr; 1,558 paintings, 14 classes)<br/>• Stratified 80/20 split (1,246 train / 312 test)<br/>• 5-Fold Stratified CV + Two-Stage ConvNeXt-Tiny Fine-Tuning<br/>• Generate test metrics, confusion matrix & Grad-CAM overlays"]:::script2
-    end
+    %% OUTPUT Directory Chain
+    OUTPUT --> O1[classification_report.txt]
+    O1 --> O2[confusion_matrix.csv]
+    O2 --> O3[confusion_matrix.png]
+    O3 --> O4[convnext_art_movement.pt]
+    O4 --> O5[cv_fold1_history.csv]
+    O5 --> O6[cv_fold2_history.csv]
+    O6 --> O7[cv_fold3_history.csv]
+    O7 --> O8[cv_fold4_history.csv]
+    O8 --> O9[cv_fold5_history.csv]
+    O9 --> O10[cv_results.csv]
+    O10 --> O11[final_train_history.csv]
+    O11 --> O12[gradcam.png]
+    O12 --> O13[test_metrics.json]
+    O13 --> O14[test_predictions.csv]
+    O14 --> O15[test_split.csv]
+    O15 --> O16[train_split.csv]
 
-    %% DATA Folder
-    subgraph DATA ["DATA/"]
-        direction TB
-        D1[("cleaned_aic_paintings_colab.csv<br/><i>Cleaned dataset with remapped Style lists</i>")]:::data
-        D2[("cleaned_aic_style_counts_colab.csv<br/><i>Aggregated style frequency counts</i>")]:::data
-    end
+    %% SCRIPTS Directory Chain
+    SCRIPTS --> S1[1_Cleaning_EDA_Script.ipynb]
+    S1 --> S2[2_Build_and_Test_Model.ipynb]
 
-    %% OUTPUT Folder
-    subgraph OUTPUT ["OUTPUT/"]
-        direction TB
-        O_SPLITS[("train_split.csv<br/>test_split.csv")]:::output
-        O_CV[("cv_results.csv<br/>cv_fold1_history.csv ... cv_fold5_history.csv")]:::output
-        O_MODEL[("convnext_art_movement.pt <i>(external link)</i><br/>final_train_history.csv")]:::output
-        O_EVAL[("test_metrics.json / classification_report.txt<br/>test_predictions.csv / confusion_matrix.csv<br/>confusion_matrix.png / gradcam.png")]:::output
-    end
+    %% Color Styling to Match Reference
+    classDef purple fill:#E1D5E7,stroke:#9673A6,stroke-width:1.5px,color:#000;
+    classDef blue fill:#DAE8FC,stroke:#6C8EBF,stroke-width:1.5px,color:#000;
+    classDef green fill:#D5E8D4,stroke:#82B366,stroke-width:1.5px,color:#000;
 
-    %% Pipeline Connections
-    RAW --> S1
-    S1 --> D1
-    S1 --> D2
-    D1 --> S2
-    S2 --> O_SPLITS
-    S2 --> O_CV
-    S2 --> O_MODEL
-    S2 --> O_EVAL
+    class Repo purple;
+    class DATA,OUTPUT,SCRIPTS,LICENSE,README_ROOT blue;
+    class D1,D2,D3,O1,O2,O3,O4,O5,O6,O7,O8,O9,O10,O11,O12,O13,O14,O15,O16,S1,S2 green;
+
+```
 ## Instructions for Reproduction 
 
 ## References
